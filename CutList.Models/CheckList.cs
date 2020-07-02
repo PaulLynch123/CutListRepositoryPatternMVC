@@ -6,7 +6,7 @@ using System.Text;
 
 namespace CutList.Models
 {
-    class CheckList
+    public class CheckList
     {
         [Key]
         public int Id { get; set; }
@@ -32,11 +32,11 @@ namespace CutList.Models
 
 
         //------ foreign key dependency ------
-        public int JobPartId { get; set; }        //convention name of Table and Id
+        //public int JobPartId { get; set; }        //convention name of Table and Id
 
         //----- navigation ---------
 
-        public JobPart JobPart { get; set; }
+        //public JobPart JobPart { get; set; }
 
 
     }

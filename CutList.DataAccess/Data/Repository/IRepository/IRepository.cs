@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 
-namespace CutList.DataAccess.Repository.IRepository
+namespace CutList.DataAccess.Data.Repository.IRepository
 {
     //use all these default functions
     public interface IRepository<T> where T : class

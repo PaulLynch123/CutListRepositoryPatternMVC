@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using CutList.Models;
 //added extension to ClassLibrary
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -14,5 +15,8 @@ namespace CutList.DataAccess.Data
             : base(options)
         {
         }
+
+        //put the model in the DbSet to use in accessing database
+        public DbSet<Job> Job { get; set; }
     }
 }

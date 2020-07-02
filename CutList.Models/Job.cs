@@ -5,7 +5,8 @@ using System.Text;
 
 namespace CutList.Models
 {
-    class Job
+    //make class public so I can access in Data project for passing model into IRepository when inheriting for implementation
+    public class Job
     {
         [Key]
         public int Id { get; set; }
@@ -43,11 +44,11 @@ namespace CutList.Models
 
 
         //------ foreign key dependency ------
-        public int JobPartsId { get; set; }
+        //public int JobPartId { get; set; }
 
         //--------- navigation links in Tables -----------
 
-        public ICollection<JobPart> JobParts { get; set; }
+        //public ICollection<JobPart> JobParts { get; set; }
         
 
     }
