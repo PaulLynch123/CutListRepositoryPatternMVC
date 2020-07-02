@@ -5,14 +5,19 @@ using System.Text;
 
 namespace CutList.Models
 {
-    class Jobs
+    class Job
     {
         [Key]
-        public int Won { get; set; }
+        public int Id { get; set; }
+        public int Won { get; set; }                //Primary key from another database??????????? don't want auto increment
 
         public string Prod_Range { get; set; }      //enum
+
+        [DataType(DataType.Date)]
         public DateTime Rqd_Ship_Date { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Orig_Rqd_Ship_Date { get; set; }
+        [DataType(DataType.Date)]
         public DateTime P_Manu_F { get; set; }
         [Display(Name ="Approval Status")]
         public bool Status { get; set; }
@@ -37,7 +42,12 @@ namespace CutList.Models
         public bool Label_Earth { get; set; }           //yes no if Earth
 
 
+        //------ foreign key dependency ------
+        public int JobPartsId { get; set; }
+
         //--------- navigation links in Tables -----------
+
+        public ICollection<JobPart> JobParts { get; set; }
         
 
     }

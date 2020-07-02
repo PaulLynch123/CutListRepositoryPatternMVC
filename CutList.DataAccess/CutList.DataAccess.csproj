@@ -16,7 +16,6 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Initializer\" />
-    <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
