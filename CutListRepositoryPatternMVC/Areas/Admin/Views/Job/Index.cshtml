@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<!-- custom class backgrounWhite found in site.css file-->
+
+<br/>
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">Job List 123</h2>
+        </div>
+        <div class="col-6 text-right">
+            <!-- update and insert is Upsert -->
+            <a asp-action="Upsert" class="btn btn-primary">
+                <!-- fontAwesome icon  https://fontawesome.com/icons?d=gallery&m=free -->
+                <i class="fas fa-plus"></i>&nbsp;&nbsp;Create New Job
+            </a>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <table id="tblData" class="table table-striped table-boarded" style="width:100%">
+        <thead>
+            <tr>
+                <th>Name 123</th>
+                <th>Display Order 123</th>
+                <!-- for edit and delete buttons -->
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<!-- add JavaScript scripts -->
+@section Scripts{ 
+    <script src="~/js/jobs.js"></script>
+}
+
+
+

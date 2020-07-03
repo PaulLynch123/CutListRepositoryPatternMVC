@@ -16,6 +16,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 //replaced the removed one above
 using CutList.DataAccess.Data;
+using CutList.DataAccess.Data.Repository.IRepository;
+using CutList.DataAccess.Data.Repository;
 
 namespace CutListRepositoryPatternMVC
 {
@@ -43,10 +45,24 @@ namespace CutListRepositoryPatternMVC
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             */
             //remove the above functionality for this application
+            /* not using the default Identity, instead pass in the IdentityRole because we may want to change the Identity user
+             * the default does not allow this
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+                */
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                //two factor authentication OR tocken use (forgetting password). 
+                //this would have been included in the AddDefaultIdentity above but I edited that code
+                .AddDefaultTokenProviders();
+            //default UI will be included from Bootstrap 4 in version Core 3.0 onwards    
+
+            //add unitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             //I have included RazorRuntimeCOmplication neGet package (MVC)
-            services.AddControllersWithViews().AddRazorRuntimeCompilation();
+            //.AddNewtonsoftJson() for calling APIs use this Json object
+            services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();
         }
 

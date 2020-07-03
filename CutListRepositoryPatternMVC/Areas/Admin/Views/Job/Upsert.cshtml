@@ -1,0 +1,70 @@
+﻿@model CutList.Models.Job
+
+@{
+    //ViewData["Title"] = "Upsert";
+    var title = "Create Job";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Upsert</h1>
+
+<form method="post" asp-action="Upsert">
+
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+            <!-- if editing -->
+            @if (Model.Id != 0)
+            {
+                <input type="hidden" asp-for="Id" />
+                //change title if editing
+                title = "Edit Job";
+            }
+
+            <div class="col-12">
+                <!-- dynamic title of page -->
+                <h2 class="text-primary">@title</h2>
+                <br />
+            </div>
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Won"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Won" class="form-control" />
+                        <span asp-validation-for="Won" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-8">
+                <div class="form-group row">
+                    <div class="col-4">
+                        <label asp-for="Project_Name"></label>
+                    </div>
+                    <div class="col-8">
+                        <input asp-for="Project_Name" class="form-control" />
+                        <span asp-validation-for="Project_Name" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- buttons -->
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    @if(Model.Id != 0)
+                    {
+                        //edit button and back to list
+                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+
+                    }
+                    else
+                    {
+                        //create button and back to list
+                        <partial name="_CreateAndBackToListButton" />
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

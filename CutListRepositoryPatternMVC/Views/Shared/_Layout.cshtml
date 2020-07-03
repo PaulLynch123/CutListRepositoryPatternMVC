@@ -17,7 +17,7 @@
     <header>
         <!-- yeti nav bar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <!--
+            <!-- ORIGIONAL NAV BAR
             <a class="navbar-brand" href="#">Navbar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -33,13 +33,27 @@
             <div class="collapse navbar-collapse" id="navbarColor01">
                 <ul class="navbar-nav mr-auto">
                     <!-- NICE WAY TO STAY ON CURRENT PAGE
-                        <li class="nav-item active">
-                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    -->
+        <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+    </li>
+    -->
                     <li class="nav-item">
-                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                        <a class="nav-link text-light" asp-area="Factory" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
+                    <!-- dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            Option dropdown 123
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item text-light" asp-area="Admin" asp-controller="Job" asp-action="Index">Job</a>
+                            <a class="dropdown-item text-light" asp-area="Admin" asp-controller="JobPart" asp-action="Index">Job Part</a>
+                            <a class="dropdown-item text-light" asp-area="Admin" asp-controller="CutList" asp-action="Index">Cut List</a>
+                        </div>
+                    </li>
+
+
                     <li class="nav-item">
                         <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                     </li>

@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Engineer\Controllers\" />
     <Folder Include="Areas\Management\Controllers\" />
+    <Folder Include="wwwroot\images\services\" />
   </ItemGroup>
 
   <ItemGroup>
