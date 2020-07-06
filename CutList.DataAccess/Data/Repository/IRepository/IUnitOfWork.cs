@@ -11,6 +11,12 @@ namespace CutList.DataAccess.Data.Repository.IRepository
     {
         IJobRepository Job { get; }         //get only
 
+        //allowing us to get the IFrequencyRepository
+        IFrequencyRepository Frequency { get; }
+
+        IServiceRepository Service { get; }
+
+
         void Save();
     }
 }

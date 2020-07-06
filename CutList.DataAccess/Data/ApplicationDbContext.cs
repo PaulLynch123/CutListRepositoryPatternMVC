@@ -18,5 +18,8 @@ namespace CutList.DataAccess.Data
 
         //put the model in the DbSet to use in accessing database
         public DbSet<Job> Job { get; set; }
+        public DbSet<Frequency> Frequency {get; set; }
+
+        public DbSet<Service> Service { get; set; }
     }
 }

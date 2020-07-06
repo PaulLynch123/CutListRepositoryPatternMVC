@@ -8,6 +8,7 @@ using System.Text;
 
 namespace CutList.DataAccess.Data.Repository
 {
+    //allowing me to pass models into each repository (where T : class)
     public class Repository<T> : IRepository<T> where T : class
     {
         //create the context with deault DBContext class
@@ -22,17 +23,19 @@ namespace CutList.DataAccess.Data.Repository
             this.dbSet = context.Set<T>();
         }
 
-
+        //add by the model object
         public void Add(T entity)
         {
             dbSet.Add(entity);
         }
 
+        //add by model object id
         public T Get(int id)
         {
             return dbSet.Find(id);
         }
 
+        //getAll for DataTables. 
         public IEnumerable<T> GetAll(Expression<Func<T, bool>> filter = null, Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, string includeProperties = null)
         {
             IQueryable<T> query = dbSet;
@@ -41,7 +44,7 @@ namespace CutList.DataAccess.Data.Repository
             {
                 query = query.Where(filter);
             }
-            //include properties (Comma seperated to allow for multiple) --eager loading--
+            //SEARCH (Comma seperated to allow for multiple individual seraches together) --eager loading--
             if(includeProperties != null)
             {
                 //remove empty entries, seperate by comma, then add each to the query one by one

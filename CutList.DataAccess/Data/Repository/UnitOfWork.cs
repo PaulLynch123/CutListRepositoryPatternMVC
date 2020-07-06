@@ -14,9 +14,17 @@ namespace CutList.DataAccess.Data.Repository
         {
             _db = db;
             Job = new JobRepository(_db);
+            //create the repository object for each model accessing database
+            Frequency = new FrequencyRepository(_db);
+            Service = new ServiceRepository(_db);
         }
 
         public IJobRepository Job { get; private set; }         //can only be set here
+
+        public IFrequencyRepository Frequency { get; private set; }
+
+        public IServiceRepository Service { get; private set; }
+
 
         //release the allocated resources for this context
         public void Dispose()

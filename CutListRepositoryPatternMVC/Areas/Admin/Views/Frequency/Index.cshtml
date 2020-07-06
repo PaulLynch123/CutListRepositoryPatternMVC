@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<!-- custom class backgrounWhite found in site.css file-->
+
+<br />
+<div class="border backgroundWhite">
+    <div class="row">
+        <div class="col-6">
+            <h2 class="text-primary">Frequency List 123</h2>
+        </div>
+        <div class="col-6 text-right">
+            <!-- update and insert is Upsert -->
+            <a asp-action="Upsert" class="btn btn-primary">
+                <!-- fontAwesome icon  https://fontawesome.com/icons?d=gallery&m=free -->
+                <i class="fas fa-plus"></i>&nbsp;&nbsp;Optional Create BUtton
+            </a>
+        </div>
+    </div>
+    <br />
+    <br />
+
+    <table id="tblData" class="table table-striped table-boarded" style="width:100%">
+        <thead>
+            <tr>
+                <th>ID 321</th>
+                <th>Frequency count 321</th>
+                <th>Freqency Name 321</th>
+                <!-- for edit and delete buttons -->
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<!-- add JavaScript scripts for data you want to load-->
+@section Scripts{
+    <script src="~/js/frequency.js"></script>
+}
