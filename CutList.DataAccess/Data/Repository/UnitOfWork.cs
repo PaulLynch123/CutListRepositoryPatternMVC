@@ -18,6 +18,7 @@ namespace CutList.DataAccess.Data.Repository
 
         public IJobRepository Job { get; private set; }         //can only be set here
 
+        //release the allocated resources for this context
         public void Dispose()
         {
             _db.Dispose();

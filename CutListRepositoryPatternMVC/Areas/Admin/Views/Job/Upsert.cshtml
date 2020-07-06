@@ -6,12 +6,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Upsert</h1>
 
 <form method="post" asp-action="Upsert">
 
     <div class="row px-2 mx-2 backgroundWhite border">
         <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
             <!-- if editing -->
             @if (Model.Id != 0)
             {
@@ -25,7 +26,7 @@
                 <h2 class="text-primary">@title</h2>
                 <br />
             </div>
-            <div class="col-8">
+            <div class="col-8 offset-1">
                 <div class="form-group row">
                     <div class="col-4">
                         <label asp-for="Won"></label>
@@ -37,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="col-8">
+            <div class="col-8 offset-1">
                 <div class="form-group row">
                     <div class="col-4">
                         <label asp-for="Project_Name"></label>
@@ -48,23 +49,24 @@
                     </div>
                 </div>
             </div>
-
+            <br />
             <!-- buttons -->
-            <div class="form-group row">
-                <div class="col-8 offset-4">
-                    @if(Model.Id != 0)
-                    {
-                        //edit button and back to list
-                        <partial name="_EditAndBackToListButton" model="Model.Id" />
+            <div class="col-8 offset-1">
+                <div class="form-group row">
+                    <div class="col-8 offset-4">
+                        @if (Model.Id != 0)
+                        {
+                            //edit button and back to list
+                            <partial name="_EditAndBackToListButton" model="Model.Id" />
 
-                    }
-                    else
-                    {
-                        //create button and back to list
-                        <partial name="_CreateAndBackToListButton" />
-                    }
+                        }
+                        else
+                        {
+                            //create button and back to list
+                            <partial name="_CreateAndBackToListButton" />
+                        }
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </form>

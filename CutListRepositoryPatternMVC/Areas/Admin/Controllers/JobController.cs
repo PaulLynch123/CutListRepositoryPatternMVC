@@ -44,7 +44,30 @@ namespace CutListRepositoryPatternMVC.Areas.Admin.Controllers
             return View(job);
         }
 
+        [HttpPost]
+        //to prevent malicious data being sent to the database. treats tampered validation token as spam request
+        [ValidateAntiForgeryToken]
+        public IActionResult Upsert(Job job)
+        {
+            if(ModelState.IsValid)
+            {
+                //check if insert
+                if(job.Id == 0)
+                {
+                    _unitOfWork.Job.Add(job);
+                }
+                else
+                //is update
+                {
+                    _unitOfWork.Job.Update(job);
+                }
 
+                _unitOfWork.Save();
+                //use nameof with redirects where possible to ensure it exists
+                return RedirectToAction(nameof(Index));
+            }
+            return View(job);
+        }
 
         #region API calls ---------
 

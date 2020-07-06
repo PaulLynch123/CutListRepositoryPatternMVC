@@ -35,6 +35,10 @@ namespace CutList.DataAccess.Data.Repository
             var objectFromDb = _db.Job.FirstOrDefault(j => j.Id == job.Id);
 
             objectFromDb.Won = job.Won;
+            objectFromDb.Project_Name = job.Project_Name;
+
+            /*
+            objectFromDb.Won = job.Won;
             //keep record of old shipping date (previousShipping date???)
             if(objectFromDb.Rqd_Ship_Date != job.Rqd_Ship_Date)
             {
@@ -42,7 +46,7 @@ namespace CutList.DataAccess.Data.Repository
                 objectFromDb.Orig_Rqd_Ship_Date = objectFromDb.Rqd_Ship_Date;
             }
             objectFromDb.Rqd_Ship_Date = job.Rqd_Ship_Date;
-
+            */
             _db.SaveChanges();
 
         }

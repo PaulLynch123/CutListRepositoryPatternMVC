@@ -3,10 +3,12 @@
     <div class="row">
         <div class="col">
             <!-- passing the integer to the method (Model.Id from Index Page)-->
-            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model">Update</button>
+            <button type="submit" class="btn btn-primary form-control" asp-route-id="@Model">
+                <i class="fas fa-edit"></i> Update</button>
         </div>
         <div class="col">
-            <a asp-action="Index" class="btn btn-success form-control">Back to List</a>
+            <a asp-action="Index" class="btn btn-success form-control">
+                <i class="fas fa-backward"></i> Back to List</a>
         </div>
     </div>
 

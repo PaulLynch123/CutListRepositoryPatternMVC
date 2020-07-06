@@ -10,6 +10,7 @@ namespace CutList.Models
     {
         [Key]
         public int Id { get; set; }
+        [Range (1,999999)]
         public int Won { get; set; }                //Primary key from another database??????????? don't want auto increment
 
         public string Prod_Range { get; set; }      //enum
