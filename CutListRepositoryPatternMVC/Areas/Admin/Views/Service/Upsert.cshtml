@@ -1,0 +1,187 @@
+﻿
+<!--- using a VM to access information -->
+@model CutList.Models.ViewModels.ServiceViewModel
+
+@{
+    //ViewData["Title"] = "Upsert";
+    var title = "Create Service";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- for uploading files 'enctype' in my form open tag. without this it won't get the file you have uploaded -->
+<form method="post" asp-action="Upsert" enctype="multipart/form-data">
+
+    <div class="row px-2 mx-2 backgroundWhite border">
+        <div asp-validation-summary="ModelOnly" class="text-danger">
+
+        </div>
+        <!-- if editing -->
+        @if(Model.Service.Id != 0)
+        {
+            //because using ViewModel to access info we need to step into the service as more than one object in the ViewModel
+            <input type="hidden" asp-for="Service.Id" />
+            //change title if editing
+            title = "Edit Service";
+        }
+
+        <div class="col-12">
+            <!-- dynamic title of page -->
+            <h2 class="text-primary">@title</h2>
+            <br />
+        </div>
+        <div class="col-9">
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.Name"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Service.Name" class="form-control" />
+                    <span asp-validation-for="Service.Name" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.Price"></label>
+                </div>
+                <div class="col-8">
+                    <!-- give sevvicePrice an id to reference in JS function -->
+                    <input asp-for="Service.Price" id="txtPrice" class="form-control" />
+                    <span asp-validation-for="Service.Price" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.LongDescription"></label>
+                </div>
+                <div class="col-8">
+                    <input asp-for="Service.LongDescription" class="form-control" />
+                    <span asp-validation-for="Service.LongDescription" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <!--  dropdownlists  -->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.FrequencyId"></label>
+                </div>
+                <div class="col-8">
+                    <select asp-for="Service.FrequencyId" asp-items="Model.FrequencyList" class="form-control"></select>
+                </div>
+            </div>
+
+            <p> A BIT OF WRITTING TO BREAK IT UP </p>
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.FrequencyId"></label>
+                </div>
+                <div class="col-8">
+                    <!-- use html helper to access dropdownlst-->
+                    <!-- FORMAT: the property you are selecting, the list you want to use as option, default message -->
+                    @Html.DropDownListFor(f => f.Service.FrequencyId, Model.FrequencyList, " - Select frequency -", new { @class = "form-control" })
+
+                </div>
+            </div>
+
+
+
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.JobId"></label>
+                </div>
+                <div class="col-8">
+                    <!-- use html helper to access dropdownlst-->
+                    <!-- FORMAT: the property you are selecting, the list you want to use as option, default message -->
+                    @Html.DropDownListFor(f => f.Service.JobId, Model.JobList,
+                   " - Select Job -", new { @class = "form-control" })
+
+                </div>
+            </div>
+
+
+            <!-- upload image button (See note at form open tag)-->
+            <div class="form-group row">
+                <div class="col-4">
+                    <label asp-for="Service.ImageUrl"></label>
+                </div>
+                <div class="col-8">
+                    <!-- uploading multiple files as Input -->
+                    <input type="file" name="files" id="uploadBox" multiple class="form-control" />
+                </div>
+            </div>
+
+            <br />
+
+            <!-- buttons -->
+
+            <div class="form-group row">
+                <div class="col-8 offset-4">
+                    <!-- access sevice.ID via the model view which has 3 objects so need to name the object -->
+                    @if (Model.Service.Id != 0)
+                    {
+                        //edit button and back to list
+                        <partial name="_EditAndBackToListButton" model="Model.Service.Id" />
+
+                    }
+                    else
+                    {
+                        //button for submit and validate file is attached as well as back to list
+                        <div class="row">
+                            <div class="col">
+                                <!-- if the JS function 'return validateInput()' false it won't submit the form and will popup-->
+                                <button type="submit" onclick="return validateInput()" class="btn btn-primary form-control">
+                                    <i class="fas fa-plus"></i> Create321
+                                </button>
+                            </div>
+                            <div class="col">
+                                <a asp-action="Index" class="btn btn-success form-control">
+                                    <i class="fas fa-backward"></i>  Back to List321
+                                </a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <!-- if its an edit request then put the image on the screen -->
+        @if(Model.Service.Id != 0)
+        {
+        <div class="col-3">
+            <img src="@Model.Service.ImageUrl" width="100" style="border-radius:5px; border:1px solid #808080" />
+        </div>
+        }
+    </div>
+</form>
+
+@section Scripts{ 
+    <script>
+        function validateInput() {
+            //if the uploadbox on the page is empty then show sweeet alert popup
+            if (document.getElementById("uploadBox").value == "") {
+                swal("File Upload Error", "Please select an image", "error123")
+                return false;
+            }
+            return true;
+        };
+
+        //stop zero appearing in the price box
+        //if zero then but nothing in its place 
+        //THIS IS NOT WORKING YET???
+        $(document).ready(function () {
+            if (document.getElementById('txtPrice').value == "0"){
+                document.getElementById('txtPrice').value == '';
+            }
+        });
+    </script>
+}

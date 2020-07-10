@@ -47,6 +47,7 @@ namespace CutListRepositoryPatternMVC.Areas.Admin.Controllers
         [HttpPost]
         //to prevent malicious data being sent to the database. treats tampered validation token as spam request
         [ValidateAntiForgeryToken]
+        //pass object in as parameter
         public IActionResult Upsert(Job job)
         {
             if(ModelState.IsValid)
