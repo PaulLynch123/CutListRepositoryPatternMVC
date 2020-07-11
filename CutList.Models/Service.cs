@@ -15,7 +15,7 @@ namespace CutList.Models
         [Display(Name = "Service Name")]
         public string Name { get; set; }
 
-        [Required]
+        
         public double Price { get; set; }
 
         [Display(Name="Description")]
@@ -35,7 +35,7 @@ namespace CutList.Models
         [ForeignKey("JobId")]
         public Job Job { get; set; }
 
-        [ForeignKey("FrequncyId")]
+        [ForeignKey("FrequencyId")]
         public Frequency Frequency { get; set; }
 
 

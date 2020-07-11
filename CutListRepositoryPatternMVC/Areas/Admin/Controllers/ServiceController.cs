@@ -147,6 +147,9 @@ namespace CutListRepositoryPatternMVC.Areas.Admin.Controllers
             }//if
             else
             {
+                //ensure list is full before sending to view incase model view is not valid
+                ServVM.JobList = _unitOfWork.Job.GetJobListForDropDown();
+                ServVM.FrequencyList = _unitOfWork.Frequency.GetFrequencyForDropdown();
                 //return to view if model state not valid
                 return View(ServVM);
             }//else

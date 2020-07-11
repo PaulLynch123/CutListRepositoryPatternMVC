@@ -48,7 +48,7 @@
                 </div>
                 <div class="col-8">
                     <!-- give sevvicePrice an id to reference in JS function -->
-                    <input asp-for="Service.Price" id="txtPrice" class="form-control" />
+                    <input asp-for="Service.Price" id="txtPrice" oninput="checkIcon2()" class="form-control" />
                     <span asp-validation-for="Service.Price" class="text-danger"></span>
                 </div>
             </div>
@@ -65,31 +65,34 @@
                 </div>
             </div>
 
+            <p> A BIT OF WRITTING TO BREAK IT UP 123</p>
 
             <!--  dropdownlists  -->
+            <!-- THIS IS TAG HELPER WAY TO CREATE THE DROPDOWN -->
             <div class="form-group row">
                 <div class="col-4">
                     <label asp-for="Service.FrequencyId"></label>
                 </div>
                 <div class="col-8">
-                    <select asp-for="Service.FrequencyId" asp-items="Model.FrequencyList" class="form-control"></select>
+                    <select asp-for="Service.FrequencyId" asp-items="Model.FrequencyList" id="freq" oninput="checkIcon3()" class="form-control"></select>
                 </div>
             </div>
 
-            <p> A BIT OF WRITTING TO BREAK IT UP </p>
+            <p> A BIT OF WRITTING TO BREAK IT UP 321</p>
 
-            <div class="form-group row">
-                <div class="col-4">
-                    <label asp-for="Service.FrequencyId"></label>
-                </div>
-                <div class="col-8">
-                    <!-- use html helper to access dropdownlst-->
-                    <!-- FORMAT: the property you are selecting, the list you want to use as option, default message -->
-                    @Html.DropDownListFor(f => f.Service.FrequencyId, Model.FrequencyList, " - Select frequency -", new { @class = "form-control" })
+            @*
+     <div class="form-group row">
+        <div class="col-4">
+            <label asp-for="Service.FrequencyId"></label>
+        </div>
+        <div class="col-8">
+            <!-- use html helper to access dropdownlst-->
+            <!-- FORMAT: the property you are selecting, the list you want to use as option, default message -->
+            @Html.DropDownListFor(f => f.Service.FrequencyId, Model.FrequencyList, " - Select frequency -", new { @class = "form-control" })
 
-                </div>
+        </div>
             </div>
-
+            *@
 
 
             <div class="form-group row">
@@ -150,7 +153,11 @@
                 </div>
             </div>
 
+            <!-- TESTING IMAGE ICON CHANGES -->
 
+            <div class="col-3">
+                <img src="~/images/copper_icon.jpg" id="bottomImage" width="100" style="border-radius:5px; border:1px solid #808080" />
+            </div>
 
         </div>
 
@@ -169,19 +176,82 @@
         function validateInput() {
             //if the uploadbox on the page is empty then show sweeet alert popup
             if (document.getElementById("uploadBox").value == "") {
-                swal("File Upload Error", "Please select an image", "error123")
+                //popup config params below (text, subtext, type of popup)
+                swal("File Upload Error", "Please select an image", "error")
                 return false;
             }
             return true;
         };
 
         //stop zero appearing in the price box
-        //if zero then but nothing in its place 
-        //THIS IS NOT WORKING YET???
+        //if zero then but nothing in its place
         $(document).ready(function () {
-            if (document.getElementById('txtPrice').value == "0"){
-                document.getElementById('txtPrice').value == '';
+            if (document.getElementById('txtPrice').value == "0") {
+                document.getElementById('txtPrice').value = '';
             }
         });
+
+        //TESTING CHANGING DATA ON SCREEN
+        function checkIcon1() {
+            if (document.getElementById('txtPrice').value == "1") {
+                document.getElementById('txtPrice').value = '9';
+            }
+        };
+
+        //WORKS TO EDIT IMAGES AS WE INPUT DIFFERENT VALUES
+        function checkIcon2() {
+            //make a time stamp for image
+            var timestamp = new Date().getTime();
+            //detect input
+            if (document.getElementById('txtPrice').value == "2") {
+                document.getElementById('txtPrice').value = '8'
+                //change src
+                document.getElementById('bottomImage').src = 'https://localhost:44363/images/Iron_icon.png';
+                //'~/images/Iron_icon.png'
+                
+            }
+        };
+
+        
+
+        //WORKS TO EDIT IMAGES AS WE INPUT DIFFERENT VALUES FROM DROPDOWN
+        function checkIcon3() {
+            //make a time stamp for image
+            var timestamp = new Date().getTime();
+            //detect input
+            if (document.getElementById('freq').value == "1") {
+                //change src
+                document.getElementById('bottomImage').src = 'https://localhost:44363/images/Iron_icon.png';
+            }
+            if (document.getElementById('freq').value == "2") {
+                //change src
+                document.getElementById('bottomImage').src = 'https://localhost:44363/images/aluminium_icon.jpg';
+            }
+            if (document.getElementById('freq').value == "3") {
+                //change src
+                document.getElementById('bottomImage').src = 'https://localhost:44363/images/copper_icon.jpg';
+            }
+        };
+
+
+        //if zero then but nothing in its place
+        function checkIcon4() {
+            //make a time stamp for image
+            //var timestamp = new Date().getTime();
+            //detect input
+            if (document.getElementById('txtPrice').value == "3") {
+                document.getElementById('txtPrice').value = '7'
+                //change src
+                document.getElementById('bottomImage').src = 'https://rlv.zcache.co.uk/element_026_fe_iron_full_square_sticker-r1ae7b2fbded44efe8881613fea79e9d1_0ugmc_8byvr_540.jpg';
+                
+                
+                //'~/images/.Iron_icon.png'
+                //I DON'T WANT TO RELOAD THE WHOLE PAGE'
+                //window.location.reload();
+                    //$("bottomImage").load(window.location.href + "bottomImage");
+            }
+        };
+ 
+
     </script>
 }

@@ -23,7 +23,7 @@ function loadDataTable() {
         //in an array
         "columns": [
             { "data": "name", "width": "20%" },
-            { "data": "job.name", "width": "20%" },
+            { "data": "job.project_Name", "width": "20%" },
             { "data": "price", "width": "15%" },
             { "data": "frequency.frequencyCount", "width": "10%" },
             //editing and deleteing info
@@ -74,7 +74,7 @@ function Delete(url) {
             type: 'DELETE',
             url: url,
             //if request succeeds run function
-            success: function (data) {
+            success: function(data) {
                 if (data.success) {
                     //call 'ShowMessage' function
                     ShowMessage(data.message);
