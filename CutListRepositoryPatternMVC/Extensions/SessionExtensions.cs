@@ -10,7 +10,7 @@ namespace CutListRepositoryPatternMVC.Extensions
 {
     public static class SessionExtensions
     {
-        //extension method fr ADD TO CART
+        //extension method for ADD TO CART
 
         //serialise the object to use in session 
         public static void SetObject(this ISession session, string key, object value)

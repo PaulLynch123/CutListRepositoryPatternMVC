@@ -8,7 +8,9 @@ using Microsoft.Extensions.Logging;
 using CutListRepositoryPatternMVC.Models;
 using CutList.DataAccess.Data.Repository.IRepository;
 using CutList.Models.ViewModels;
-
+using Microsoft.AspNetCore.Http;
+using CutList.Utility;
+using CutListRepositoryPatternMVC.Extensions;
 
 namespace CutListRepositoryPatternMVC.Controllers
 {
@@ -54,6 +56,37 @@ namespace CutListRepositoryPatternMVC.Controllers
             //get by id, filtered by 
             var serviceFromDb = _unitOfWork.Service.GetFirstOrDefault(includeProperties: "Job,Frequency", filter: j => j.Id == id);
             return View(serviceFromDb);
+        }
+
+
+        public IActionResult AddToCart(int serviceId)
+        {
+            List<int> sessionList = new List<int>();
+            //if nothing in the session cart
+            if(string.IsNullOrEmpty(HttpContext.Session.GetString(StaticDetails.SessionCart)))
+            {
+                //add seviceId
+                sessionList.Add(serviceId);
+                //set object with extension method putting it in SessionCart as a string
+                HttpContext.Session.SetObject(StaticDetails.SessionCart, sessionList);
+            }
+            //if there are things in the cart/session already
+            else
+            {
+                //Get the session. (http Context for the current controller action)
+                //convert to List of type int
+                sessionList = HttpContext.Session.GetObject<List<int>>(StaticDetails.SessionCart);
+                //id serviceId is not in the sessionList
+                if (!sessionList.Contains(serviceId))
+                {
+                    //add serviceId to session list
+                    sessionList.Add(serviceId);
+                    //reload session object back
+                    HttpContext.Session.SetObject(StaticDetails.SessionCart, sessionList);
+                }
+            }//else
+             //retrun to Index page
+            return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Privacy()
