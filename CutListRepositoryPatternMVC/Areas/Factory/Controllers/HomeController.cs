@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CutListRepositoryPatternMVC.Models;
+using CutList.DataAccess.Data.Repository.IRepository;
+using CutList.Models.ViewModels;
+
 
 namespace CutListRepositoryPatternMVC.Controllers
 {
@@ -13,16 +16,37 @@ namespace CutListRepositoryPatternMVC.Controllers
     [Area("Factory")]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        //private readonly ILogger<HomeController> _logger;
 
+        //access Db
+        private readonly IUnitOfWork _unitOfWork;
+        //HomeViewModel object
+        private HomeViewModel HomeVM;
+
+        //constructor to get IUnitOfWork
+        public HomeController(IUnitOfWork unitOfWork)
+        {
+            _unitOfWork = unitOfWork;
+        }
+
+        /*
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
         }
+        */
 
         public IActionResult Index()
         {
-            return View();
+            //create HomeViewModel
+            HomeVM = new HomeViewModel()
+            {
+                //get info for HomeView
+                JobList = _unitOfWork.Job.GetAll(),
+                ServiceList = _unitOfWork.Service.GetAll(includeProperties: "Frequency")
+            };
+            //return the HomeViewModel
+            return View(HomeVM);
         }
 
         public IActionResult Privacy()

@@ -1,8 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model CutList.Models.ViewModels.HomeViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome P</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<!-- list out all the orderBy-->
+
+@foreach(var job in Model.JobList.OrderBy(o => o.Project_Name))
+{
+    @if (Model.ServiceList.Where(j => j.JobId == job.Id).Count() > 0)
+    {
+        <div class="row container pb-3 backgroundWhite">
+            <div class="col-12">
+                <div class="row">
+                    <h2 class="text-success"><b>@job.Won</b></h2>
+
+                    <div class="col-12">
+                        <div class="row my-2">
+                            @foreach(var service in Model.ServiceList.Where(c => c.JobId == job.Id))
+                            {
+                                <div class="col-lg-4 col-xl-3 col-md-6 pb-4">
+                                    <!-- circular edge with background image -->
+                                    <div class="card" style="border:2px solid #0094ff;border-radius:5px; background:url('/images/beach_background.jfif')">
+                                        <div class="pl-3 pt-1 text-center">
+                                            <h3 class="card-title text-primary"><b>@service.Name</b></h3>
+                                        </div>
+                                        <div class="d-flex justify-content-between">
+                                            <!-- padding left 3 -->
+                                            <div class="pl-1 text-muted">Price per service</div>
+                                            <div class="pl-1 text-danger h5">$@service.Price</div>
+                                        </div>
+                                        <img src="@service.ImageUrl" class="card-img-top p-2 rounded"/>
+
+                                        <div class="text-muted text-center pb-2">
+                                        @service.Frequency.Name
+                                        </div>
+                                        <a asp-action="Details" class="btn btn-success" style="border-radius:2px;" asp-route-id="@service.Id">Details123</a>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}

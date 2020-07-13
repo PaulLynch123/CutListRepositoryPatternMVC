@@ -4,7 +4,7 @@ using System.Text;
 
 namespace CutList.Models.ViewModels
 {
-    class HomeViewModel
+    public class HomeViewModel
     {
 
         //dropdown info needed
