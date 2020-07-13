@@ -1,5 +1,13 @@
 ﻿@model CutList.Models.Service
 
+<!-- the forllowing 4 using / inject statements are needed for SESSIONS recording in the Navigation bar -->
+@using CutList.Utility
+@using Microsoft.AspNetCore.Http
+<!-- inject the HTTPcontext accessor -->
+@inject IHttpContextAccessor HttpContextAccessor
+@using CutListRepositoryPatternMVC.Extensions
+
+
 @{
     ViewData["Title"] = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -44,7 +52,33 @@
                     <a asp-action="Index" class="btn btn-success form-control btn-lg" style="height:50px;">Back to List 123</a>
                 </div>
                 <div class="col-12 col-md-6 pb-1">
-                    <a asp-action="AddToCart" asp-route-serviceId="@Model.Id" class="btn btn-primary btn-outline-dark form-control btn-lg" style="height:50px;">Add to Cart 123</a>
+                    @{
+                        var addToCartEnabled = true;
+
+                        if (HttpContextAccessor.HttpContext.Session.GetObject<List<int>>(CutList.Utility.StaticDetails.SessionCart) != null)
+                        {
+                            //get session list and check if this exists in it already
+                            var sessionList = HttpContextAccessor.HttpContext.Session.GetObject<List<int>>(CutList.Utility.StaticDetails.SessionCart);
+                            //if the session ID is in the cart already
+                            if (sessionList.Contains(Model.Id))
+                            {
+                                //set this to false. it will control the look of the button
+                                addToCartEnabled = false;
+                            }
+                        }
+                    }
+
+                    @if (addToCartEnabled)
+                    {
+                        <a asp-action="AddToCart" asp-route-serviceId="@Model.Id" class="btn btn-primary btn-outline-dark form-control btn-lg" style="height:50px;">Add to Cart 123</a>
+                    }
+                    else
+                    {
+                        //disabled button so we can't use it. It says that item is already in cart
+                        <button class="btn btn-primary btn-square form-control btn-lg" style="height:50px;" disabled >Item in cart 321</button>
+                    }
+
+                    
                 </div>
             </div>
         </div>

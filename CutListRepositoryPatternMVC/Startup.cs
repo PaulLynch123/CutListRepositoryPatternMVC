@@ -60,6 +60,14 @@ namespace CutListRepositoryPatternMVC
             //add unitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            //configure the session for use in 'Shopping Cart'
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
             //I have included RazorRuntimeCOmplication neGet package (MVC)
             //.AddNewtonsoftJson() for calling APIs use this Json object
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
@@ -84,6 +92,9 @@ namespace CutListRepositoryPatternMVC
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            //use sessions for Shopping cart
+            app.UseSession();
 
             app.UseRouting();
 
