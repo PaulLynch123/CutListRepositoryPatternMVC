@@ -49,6 +49,13 @@ namespace CutListRepositoryPatternMVC.Controllers
             return View(HomeVM);
         }
 
+        public IActionResult Details(int id)
+        {
+            //get by id, filtered by 
+            var serviceFromDb = _unitOfWork.Service.GetFirstOrDefault(includeProperties: "Job,Frequency", filter: j => j.Id == id);
+            return View(serviceFromDb);
+        }
+
         public IActionResult Privacy()
         {
             return View();
