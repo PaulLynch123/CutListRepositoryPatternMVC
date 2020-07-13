@@ -1,5 +1,4 @@
-﻿
-<!--- using a VM to access information -->
+﻿<!--- using a VM to access information -->
 @model CutList.Models.ViewModels.ServiceViewModel
 
 @{
@@ -16,7 +15,7 @@
 
         </div>
         <!-- if editing -->
-        @if(Model.Service.Id != 0)
+        @if (Model.Service.Id != 0)
         {
             //because using ViewModel to access info we need to step into the service as more than one object in the ViewModel
             <input type="hidden" asp-for="Service.Id" />
@@ -60,10 +59,12 @@
                     <label asp-for="Service.LongDescription"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="Service.LongDescription" class="form-control" />
+                    <!-- change from input to 'textarea' -->
+                    <textarea asp-for="Service.LongDescription" class="form-control"></textarea>
                     <span asp-validation-for="Service.LongDescription" class="text-danger"></span>
                 </div>
             </div>
+          
 
             <p> A BIT OF WRITTING TO BREAK IT UP 123</p>
 
@@ -81,17 +82,17 @@
             <p> A BIT OF WRITTING TO BREAK IT UP 321</p>
 
             @*
-     <div class="form-group row">
-        <div class="col-4">
-            <label asp-for="Service.FrequencyId"></label>
-        </div>
-        <div class="col-8">
-            <!-- use html helper to access dropdownlst-->
-            <!-- FORMAT: the property you are selecting, the list you want to use as option, default message -->
-            @Html.DropDownListFor(f => f.Service.FrequencyId, Model.FrequencyList, " - Select frequency -", new { @class = "form-control" })
+                <div class="form-group row">
+                   <div class="col-4">
+                       <label asp-for="Service.FrequencyId"></label>
+                   </div>
+                   <div class="col-8">
+                       <!-- use html helper to access dropdownlst-->
+                       <!-- FORMAT: the property you are selecting, the list you want to use as option, default message -->
+                       @Html.DropDownListFor(f => f.Service.FrequencyId, Model.FrequencyList, " - Select frequency -", new { @class = "form-control" })
 
-        </div>
-            </div>
+                   </div>
+                       </div>
             *@
 
 
@@ -162,17 +163,27 @@
         </div>
 
         <!-- if its an edit request then put the image on the screen -->
-        @if(Model.Service.Id != 0)
+        @if (Model.Service.Id != 0)
         {
-        <div class="col-3">
-            <img src="@Model.Service.ImageUrl" width="100" style="border-radius:5px; border:1px solid #808080" />
-        </div>
+            <div class="col-3">
+                <img src="@Model.Service.ImageUrl" width="100" style="border-radius:5px; border:1px solid #808080" />
+            </div>
         }
     </div>
 </form>
 
-@section Scripts{ 
+@section Scripts{
+    <!-- TINY MCE for editing text -->
+    <script src="https://cdn.tiny.cloud/1/97xd5xu9ni3rsvrlxxb6mcf7pjqrecowletce9zo8jg549r1/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+    
     <script>
+        //set some properties of TINY MCE for my LongDescription property
+        tinymce.init({
+            selector: 'textarea',
+            plugins: 'lists',
+            menubar: 'file edit format'
+        });
+
         function validateInput() {
             //if the uploadbox on the page is empty then show sweeet alert popup
             if (document.getElementById("uploadBox").value == "") {
@@ -208,11 +219,11 @@
                 //change src
                 document.getElementById('bottomImage').src = 'https://localhost:44363/images/Iron_icon.png';
                 //'~/images/Iron_icon.png'
-                
+
             }
         };
 
-        
+
 
         //WORKS TO EDIT IMAGES AS WE INPUT DIFFERENT VALUES FROM DROPDOWN
         function checkIcon3() {
@@ -243,15 +254,15 @@
                 document.getElementById('txtPrice').value = '7'
                 //change src
                 document.getElementById('bottomImage').src = 'https://rlv.zcache.co.uk/element_026_fe_iron_full_square_sticker-r1ae7b2fbded44efe8881613fea79e9d1_0ugmc_8byvr_540.jpg';
-                
-                
+
+
                 //'~/images/.Iron_icon.png'
                 //I DON'T WANT TO RELOAD THE WHOLE PAGE'
                 //window.location.reload();
-                    //$("bottomImage").load(window.location.href + "bottomImage");
+                //$("bottomImage").load(window.location.href + "bottomImage");
             }
         };
- 
+
 
     </script>
 }

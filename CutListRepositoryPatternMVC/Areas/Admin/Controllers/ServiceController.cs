@@ -165,6 +165,35 @@ namespace CutListRepositoryPatternMVC.Areas.Admin.Controllers
         }
 
 
+        [HttpDelete]
+        public IActionResult Delete(int id)
+        {
+            var serviceFromDb = _unitOfWork.Service.Get(id);
+            //delete image related to service
+
+            //file path of the host server root folder
+            string webRootPath = _hostEnvironment.WebRootPath;
+            //if file exists delete
+            var imagePath = Path.Combine(webRootPath, serviceFromDb.ImageUrl.TrimStart('\\'));
+            //if image file exists
+            if (System.IO.File.Exists(imagePath))
+            {
+                //delete old file in order to replace it
+                System.IO.File.Delete(imagePath);
+            }
+
+            //if no service show error message or show success message
+            if(serviceFromDb == null)
+            {
+                return Json(new { success=false, message="Error in attempting to delete 123"});
+            }
+            //remove from DB
+            _unitOfWork.Service.Remove(serviceFromDb);
+            _unitOfWork.Save();
+            //success message
+            return Json(new { success = true, message = "Deleted successfully" });
+        }
+
         #endregion
     }
 }
