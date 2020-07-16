@@ -8,5 +8,10 @@ namespace CutList.Utility
     {
         //list of static strings I will reference this instead
         public const string SessionCart = "Cart";
+
+        //for use in sessions, service order submission
+        public const string StatusSubmitted = "Submitted";
+        public const string StatusApproved = "Approved";
+        public const string StatusRejected = "Rejected";
     }
 }

@@ -1,0 +1,169 @@
+﻿@model CutList.Models.ViewModels.CartViewModel
+
+
+@{
+    ViewData["Title"] = "Summary";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>SUmmary</h1>
+
+<form method="post">
+    <!-- if there is anyhitng in the ServiceList (i.e ordered by user) -->
+    @if (Model.ServiceList.Count > 0)
+    {
+        <br />
+        <div class="backgroundWhite container">
+            <div class="card">
+                <!--------------- card header ---------------------->
+                <div class="card-header bg-dark text-light ml-0 row container">
+                    <div class="col-12 d-none d-md-block col-md-6 pb-1">
+                        <i class="fas fa-shopping-cart"></i> &nbsp; Oder Summary 321
+                    </div>
+
+                    <div class="col-12 col-md-4 offset-md-2 text-right">
+                        <a asp-action="Index" asp-controller="Cart" asp-area="Factory" class="btn btn-outline-info form-control btn-sm">
+                            Back to cart 321
+                        </a>
+                    </div>
+
+                </div>
+
+                <!---------------- Card Body ---------------------->
+                <div class="card-body">
+
+                    <div class="container" rounderd p-2>
+                        <div class="row">
+                            <div asp-validation-summary="ModelOnly" class="text-danger">
+
+                            </div>
+                            <div class="col-12 col-lg-6 pb-4">
+                                <div class="row">
+                                    <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                        <span class="text-primary">PickUp Details 123</span>
+                                    </h4>
+                                </div>
+
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Name 111</label>
+                                    </div>
+                                    <div col class="col-9">
+                                        <!-- custom validation for name -->
+                                        <input asp-for="OrderHeader.Name" id="txtName" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.Name" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Phone 222</label>
+                                    </div>
+                                    <div col class="col-9">
+                                        <!-- custom validation for phone -->
+                                        <input asp-for="OrderHeader.Phone" id="txtPhone" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.Phone" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Address 333</label>
+                                    </div>
+                                    <div col class="col-9">
+                                        <input asp-for="OrderHeader.Address" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.Address" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>City 444</label>
+                                    </div>
+                                    <div col class="col-9">
+                                        <input asp-for="OrderHeader.City" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.City" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Post code 555</label>
+                                    </div>
+                                    <div col class="col-9">
+                                        <input asp-for="OrderHeader.PostCode" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.PostCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="row my-1">
+                                    <div class="col-3">
+                                        <label>Email 666</label>
+                                    </div>
+                                    <div col class="col-9">
+                                        <input asp-for="OrderHeader.Email" type="text" class="form-control" />
+                                        <span asp-validation-for="OrderHeader.Email" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 col-lg-5 offset-lg-1">
+                                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                                    <span class="text-primary">Order Summary 321</span>
+                                </h4>
+                                <!-- unordered list -->
+                                <ul class="list-group mb-3">
+                                    <!-- iterate through service list and keep order total -->
+                                    @{ 
+                                        var total = 0.0;
+                                    }
+
+                                    @foreach(var details in Model.ServiceList)
+                                    {
+                                        <li class="list-group-item d-flex justify-content-between">
+                                            <div>
+                                                <input type="hidden" asp-for="@details.Id" />
+                                                <h6 class="my-0">@details.Name</h6>
+                                                <small class="text-muted">Frequency : @details.Frequency.FrequencyCount</small>
+                                            </div>
+                                            <span class="text-muted">£@(details.Price*details.Frequency.FrequencyCount)</span>
+
+                                            <!-- updating total -->
+                                            @{ 
+                                                total += (details.Price * details.Frequency.FrequencyCount);
+                                            }
+                                        </li>
+                                    }
+
+                                    <li class="list-group-item d-flex justify-content-between bg-light">
+                                        <small class="text-primary">Total (Sterling)</small>
+                                        <strong class="text-primary">£@total</strong>
+                                    </li>
+
+                                </ul>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!----------------- Card footer --------------->
+                    <div class="card-footer">
+                        <div class="col-12 col-md-6 offset-md-6 col-lg-4 offset-lg-8 text-right">
+                            <button type="submit" class="btn btn-success form-control">
+                                Place order 123
+                            </button>
+                        </div>
+                    </div>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        //else if there is nothing in the
+        <div class="backgroundWhite"> no items assed to the shoping cart... 123... </div>
+    }
+
+</form>

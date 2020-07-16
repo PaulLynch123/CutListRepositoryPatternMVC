@@ -1,0 +1,27 @@
+﻿@model int
+<!-- we are only passing an int so the model is just that -->
+
+@{
+    ViewData["Title"] = "OrderConfirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>OrderConfirmation</h1>
+
+<div class="container row">
+    <div class="col-12 text-center">
+        <h1 class="text-primary text-center">Order Request Submitted 321</h1>
+        <br />
+        <img src="~/images/fair-enough-back-to-work.jpg" width="500" />
+    </div>
+    <div class="col-12 text-center" style="color:magenta">
+        <br />
+        Thanks for submitting a request online.
+        <br />
+        We have recieved you request and our team will be calling you shortly.
+        <br />
+        Your request ID is : <strong>@Model</strong>
+    </div>
+
+</div>
+

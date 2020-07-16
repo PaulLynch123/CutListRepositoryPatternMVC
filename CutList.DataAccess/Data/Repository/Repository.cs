@@ -78,7 +78,7 @@ namespace CutList.DataAccess.Data.Repository
                     query = query.Include(includeProperty);
                 }
             }
-            //return the first 
+            //return the first
             return query.FirstOrDefault();
         }
 
