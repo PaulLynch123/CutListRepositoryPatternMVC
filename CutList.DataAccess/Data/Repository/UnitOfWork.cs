@@ -17,6 +17,8 @@ namespace CutList.DataAccess.Data.Repository
             //create the repository object for each model accessing database
             Frequency = new FrequencyRepository(_db);
             Service = new ServiceRepository(_db);
+            OrderHeader = new OrderHeaderRepository(_db);
+            OrderDetails = new OrderDetailsRepository(_db);
         }
 
         public IJobRepository Job { get; private set; }         //can only be set here
@@ -25,7 +27,11 @@ namespace CutList.DataAccess.Data.Repository
 
         public IServiceRepository Service { get; private set; }
 
+        public IOrderHeaderRepository OrderHeader { get; private set; }
 
+        public IOrderDetailsRepository OrderDetails { get; private set; }
+
+        
         //release the allocated resources for this context
         public void Dispose()
         {
