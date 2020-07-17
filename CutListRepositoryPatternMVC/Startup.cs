@@ -18,6 +18,8 @@ using Microsoft.Extensions.Hosting;
 using CutList.DataAccess.Data;
 using CutList.DataAccess.Data.Repository.IRepository;
 using CutList.DataAccess.Data.Repository;
+using Microsoft.AspNetCore.Identity.UI.Services;
+using CutList.Utility;
 
 namespace CutListRepositoryPatternMVC
 {
@@ -57,6 +59,11 @@ namespace CutListRepositoryPatternMVC
                 .AddDefaultTokenProviders();
             //default UI will be included from Bootstrap 4 in version Core 3.0 onwards    
 
+
+            //add this to implement the IEmailSender despite not doing anything with the Register email option
+            services.AddSingleton<IEmailSender, EmailSender>();
+
+
             //add unitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -72,6 +79,21 @@ namespace CutListRepositoryPatternMVC
             //.AddNewtonsoftJson() for calling APIs use this Json object
             services.AddControllersWithViews().AddNewtonsoftJson().AddRazorRuntimeCompilation();
             services.AddRazorPages();
+
+            //for login pages access??????????
+            /*
+            services.ConfigureApplicationCookie(options =>
+
+            {
+
+                options.LoginPath = $"/Identity/Account/Login";
+
+                options.LogoutPath = $"/Identity/Account/Logout";
+
+                options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+
+            });
+            */
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

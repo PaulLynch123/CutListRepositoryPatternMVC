@@ -13,5 +13,10 @@ namespace CutList.Utility
         public const string StatusSubmitted = "Submitted";
         public const string StatusApproved = "Approved";
         public const string StatusRejected = "Rejected";
+
+
+        //user roles
+        public const string Admin = "Admin";
+        public const string Management = "Management";
     }
 }
