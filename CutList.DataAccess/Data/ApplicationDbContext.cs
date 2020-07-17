@@ -26,5 +26,8 @@ namespace CutList.DataAccess.Data
 
         public DbSet<OrderDetails> OrderDetails { get; set; }
 
+        //adding fields to default User table
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
     }
 }
