@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CutList.DataAccess.Data.Repository.IRepository;
 using CutList.Models;
+using CutList.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -79,7 +80,11 @@ namespace CutListRepositoryPatternMVC.Areas.Admin.Controllers
         {
             //pass the Json object
             //use the GetAll method in the Interface
-            return Json(new { data = _unitOfWork.Job.GetAll() });
+            //return Json(new { data = _unitOfWork.Job.GetAll() });
+
+            //stored procedure accessed via stored procedure repositary
+            //use returnList method<returning job type> (pass stored rocedure name, no more parameteres)
+            return Json(new { data = _unitOfWork.SP_Call.ReturnList<Job>(StaticDetails.cutStoredProcedure_GetAllJob, null) });
         }
 
         [HttpDelete]

@@ -14,9 +14,11 @@ namespace CutList.Utility
         public const string StatusApproved = "Approved";
         public const string StatusRejected = "Rejected";
 
-
         //user roles
         public const string Admin = "Admin";
         public const string Management = "Management";
+
+        //stored procedure
+        public const string cutStoredProcedure_GetAllJob = "cutStoredProcedure_GetAllJob";
     }
 }

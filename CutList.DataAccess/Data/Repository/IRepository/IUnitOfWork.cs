@@ -23,6 +23,9 @@ namespace CutList.DataAccess.Data.Repository.IRepository
         IUserRepository User { get; }
 
 
+        //stored procedure
+        ISP_Call SP_Call { get; }
+
         void Save();
     }
 }

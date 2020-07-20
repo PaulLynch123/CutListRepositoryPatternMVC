@@ -21,6 +21,8 @@ namespace CutList.DataAccess.Data.Repository
             OrderDetails = new OrderDetailsRepository(_db);
             //user
             User = new UserRepository(_db);
+            //stored procedure
+            SP_Call = new SP_Call(_db);
 
         }
 
@@ -36,6 +38,9 @@ namespace CutList.DataAccess.Data.Repository
 
         //user
         public IUserRepository User { get; private set; }
+
+        //stored procedure
+        public ISP_Call SP_Call { get; private set; }
 
 
         //release the allocated resources for this context
