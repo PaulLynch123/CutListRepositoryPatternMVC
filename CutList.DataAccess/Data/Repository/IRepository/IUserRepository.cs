@@ -7,8 +7,12 @@ using System.Text;
 namespace CutList.DataAccess.Data.Repository.IRepository
 {
     //putting my Job model in the IRepository
-    public interface IOrderHeaderRepository : IRepository<OrderHeader>
+    public interface IUserRepository : IRepository<ApplicationUser>
     {
+        //lock a user (string as it is a Grid)
+        void LockUser(string userId);
+
+        void UnLockUser(string userId);
 
     }
 }

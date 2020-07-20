@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using CutList.DataAccess.Data.Repository;
 using CutList.DataAccess.Data.Repository.IRepository;
 using CutList.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;                 //for saving images or files to server
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Operations;
 
 namespace CutListRepositoryPatternMVC.Areas.Admin.Controllers
 {
+    [Authorize]
     //user
     [Area("Admin")]
     public class ServiceController : Controller

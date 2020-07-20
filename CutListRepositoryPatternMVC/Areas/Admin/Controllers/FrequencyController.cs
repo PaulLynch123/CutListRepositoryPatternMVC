@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using CutList.DataAccess.Data.Repository.IRepository;
 using CutList.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CutListRepositoryPatternMVC.Areas.Admin.Controllers
 {
+    [Authorize]
     [Area("Admin")]
     public class FrequencyController : Controller
     {

@@ -20,6 +20,8 @@ namespace CutList.DataAccess.Data.Repository.IRepository
 
         IOrderDetailsRepository OrderDetails { get; }
 
+        IUserRepository User { get; }
+
 
         void Save();
     }

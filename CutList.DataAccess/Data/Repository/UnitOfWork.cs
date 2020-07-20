@@ -19,6 +19,9 @@ namespace CutList.DataAccess.Data.Repository
             Service = new ServiceRepository(_db);
             OrderHeader = new OrderHeaderRepository(_db);
             OrderDetails = new OrderDetailsRepository(_db);
+            //user
+            User = new UserRepository(_db);
+
         }
 
         public IJobRepository Job { get; private set; }         //can only be set here
@@ -31,7 +34,10 @@ namespace CutList.DataAccess.Data.Repository
 
         public IOrderDetailsRepository OrderDetails { get; private set; }
 
-        
+        //user
+        public IUserRepository User { get; private set; }
+
+
         //release the allocated resources for this context
         public void Dispose()
         {

@@ -81,9 +81,8 @@ namespace CutListRepositoryPatternMVC
             services.AddRazorPages();
 
             //for login pages access??????????
-            /*
+            //https://docs.microsoft.com/en-us/aspnet/core/security/authentication/scaffold-identity?view=aspnetcore-3.0&tabs=visual-studio#create-full-identity-ui-source
             services.ConfigureApplicationCookie(options =>
-
             {
 
                 options.LoginPath = $"/Identity/Account/Login";
@@ -93,7 +92,7 @@ namespace CutListRepositoryPatternMVC
                 options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 
             });
-            */
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

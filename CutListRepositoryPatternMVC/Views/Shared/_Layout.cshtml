@@ -50,6 +50,9 @@
                         <a class="nav-link text-light" asp-area="Factory" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     <!-- dropdown -->
+                    <!-- if manager or Admin user then show -->
+                    @if(User.IsInRole(StaticDetails.Management) || User.IsInRole(StaticDetails.Admin))
+                    {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                            aria-haspopup="true" aria-expanded="false">
@@ -61,8 +64,17 @@
                             <a class="dropdown-item text-light" asp-area="Admin" asp-controller="CutList" asp-action="Index">Cut List</a>
                             <a class="dropdown-item text-white" asp-area="Admin" asp-controller="Frequency" asp-action="Index">Frequency</a>
                             <a class="dropdown-item text-white" asp-area="Admin" asp-controller="Service" asp-action="Index">Service</a>
+                            <!-- user registration by Administrator -->
+                            @if (User.IsInRole(StaticDetails.Admin))
+                            {
+                                <a class="dropdown-item text-white" asp-area="Admin" asp-controller="User" asp-action="Index">User</a>
+                            }
+
+                            <a class="dropdown-item text-white" asp-area="Admin" asp-controller="Order" asp-action="Index">Order</a>
                         </div>
                     </li>
+                    }
+                    
 
 
                     <li class="nav-item">

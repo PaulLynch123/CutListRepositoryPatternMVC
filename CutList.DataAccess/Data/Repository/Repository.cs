@@ -67,6 +67,7 @@ namespace CutList.DataAccess.Data.Repository
             //getAll with a filter
             if (filter != null)
             {
+                //if not null the put the Where clause in with the filter
                 query = query.Where(filter);
             }
             //include properties (Comma seperated to allow for multiple) --eager loading--

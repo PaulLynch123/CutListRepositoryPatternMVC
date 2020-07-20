@@ -1,0 +1,76 @@
+﻿<!-- to access some staticDetails-->
+@using CutList.Utility
+
+@*condition to highlight weather it is pending/ approved / all
+adding CSS to the view below*@
+@{ 
+    var status = Context.Request.Query["status"];
+
+    var approved = "text-primary";
+    var pending = "text-primary";
+    var all = "text-primary";
+
+        if(status == "approved")
+    {
+        approved = "active text-white";
+    }
+    else
+    {
+        if(status == "pending")
+        {
+            pending = "active text-white";
+        }
+        else
+        {
+            all = "active text-white";
+        }
+    }
+}
+
+
+<h1>Index</h1>
+
+<div class="border backgroundWhite p-3">
+    <div class="d-flex justify-content-between mb-3">
+        <div class="p-2">
+            <h2 class="text-primary">Orders List 123</h2>
+        </div>
+        <div class="p-2">
+            <ul class="list-group list-group-horizontal-sm">
+                <!-- approved / all / pending -->
+                <!-- Index action or Order controller. Route id which will be fetched from the url which will modify the calls through oRder.js -->
+                <a style="text-decoration:none" asp-controller="Order" asp-route-status="pending" asp-action="Index">
+                    <li class="list-group-item @pending">Pending</li>
+                </a>
+                <a style="text-decoration:none" asp-controller="Order" asp-route-status="approved" asp-action="Index">
+                    <li class="list-group-item @approved">Approved</li>
+                </a>
+                <a style="text-decoration:none" asp-controller="Order" asp-route-status="all" asp-action="Index">
+                    <li class="list-group-item @all">All</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+
+    <!-- table goes here -->
+    <br />
+    <table id="tblData" class="table table-striped table-bordered" style="width:100%">
+        <!--table headers - -->
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Count</th>
+                <th>Status</th>
+                <!-- buttons -->
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+
+</div>
+
+@section Scripts{ 
+<script src="~/js/orders.js"></script>
+}
