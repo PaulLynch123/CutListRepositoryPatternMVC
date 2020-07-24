@@ -117,13 +117,14 @@ namespace CutListRepositoryPatternMVC.Areas.Identity.Pages.Account
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    //check if the role im assigning exists
-                    if(!await _roleManager.RoleExistsAsync(StaticDetails.Admin))
-                    {
-                        //create roles in the Asp.NetUserRoles table
-                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.Admin));
-                        await _roleManager.CreateAsync(new IdentityRole(StaticDetails.Management));
-                    }
+                    ////check if the role im assigning exists
+                    //if(!await _roleManager.RoleExistsAsync(StaticDetails.Admin))
+                    //{
+                    //    //create roles in the Asp.NetUserRoles table
+                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.Admin));
+                    //    await _roleManager.CreateAsync(new IdentityRole(StaticDetails.Management));
+                    //}
+
                     //check which group radio button was clicked for user type
                     string role = Request.Form["rdUserRole"].ToString();
                     //if selected is 

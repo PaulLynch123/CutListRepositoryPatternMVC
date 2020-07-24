@@ -20,6 +20,7 @@ using CutList.DataAccess.Data.Repository.IRepository;
 using CutList.DataAccess.Data.Repository;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using CutList.Utility;
+using CutList.DataAccess.Data.Initializer;
 
 namespace CutListRepositoryPatternMVC
 {
@@ -67,6 +68,9 @@ namespace CutListRepositoryPatternMVC
             //add unitOfWork
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
+            //Add my seeding Initialiser class
+            services.AddScoped<IDbInitialiser, DbInitialiser>();
+
             //configure the session for use in 'Shopping Cart'
             services.AddSession(options =>
             {
@@ -97,7 +101,7 @@ namespace CutListRepositoryPatternMVC
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         //Middleware pipeline for request and response (context pipeline1 then pipeline2 etc response or 404 no response. Context Object goes back)
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitialiser paulInitialise)
         {
             if (env.IsDevelopment())
             {
@@ -118,6 +122,9 @@ namespace CutListRepositoryPatternMVC
             app.UseSession();
 
             app.UseRouting();
+
+            //seed with admin user if not already present
+            paulInitialise.Initialise();
 
             app.UseAuthentication();
             app.UseAuthorization();
